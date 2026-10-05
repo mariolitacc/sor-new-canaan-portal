@@ -7,6 +7,7 @@
   <title>School of Rock New Canaan</title>
 
   <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="icon.png">
   <meta name="theme-color" content="#d60000">
 
   <style>
@@ -30,7 +31,7 @@
 
     .brand {
       text-align: center;
-      margin-bottom: 42px;
+      margin-bottom: 28px;
     }
 
     .brand h1 {
@@ -43,6 +44,26 @@
       margin: 10px 0 0;
       color: #aaa;
       font-size: 16px;
+    }
+
+    .install-tip {
+      background: #1e1e1e;
+      border: 1px solid #444;
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .install-tip strong {
+      font-size: 15px;
+    }
+
+    .install-tip p {
+      color: #bbb;
+      font-size: 14px;
+      line-height: 1.5;
+      margin: 8px 0 0;
     }
 
     .card {
@@ -94,6 +115,14 @@
       <p>NEW CANAAN</p>
     </div>
 
+    <div class="install-tip" id="installTip">
+      <strong>ADD THIS APP TO YOUR PHONE</strong>
+      <p>
+        On iPhone: tap <b>Share</b> → <b>Add to Home Screen</b> →
+        turn on <b>Open as Web App</b> → <b>Add</b>.
+      </p>
+    </div>
+
     <a class="card" href="https://newcanaan-sor.pike13.com">
       <h2>MY ACCOUNT</h2>
       <p>View your schedule, cancel a lesson, schedule a make-up, manage billing and account information.</p>
@@ -121,6 +150,17 @@
   <script>
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker.register("sw.js");
+    }
+
+    const isStandalone =
+      window.matchMedia("(display-mode: standalone)").matches ||
+      window.navigator.standalone === true;
+
+    if (isStandalone) {
+      const installTip = document.getElementById("installTip");
+      if (installTip) {
+        installTip.style.display = "none";
+      }
     }
   </script>
 
